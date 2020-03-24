@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,11 +8,25 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  getuser() {
-    //  return this.http.get()
+  private URL = 'http://localhost:5000/auth';
+
+  private auth = window.localStorage.getItem('auth');
+
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${JSON.parse(this.auth).token}`
+  })
+
+  getUser() {
+    return this.http.get<any[]>(`${this.URL}/users`, { headers: this.headers })
+
   }
 
-  login(email, password) {
-    return this.http.post(`/auth/users_login`, email, password);
+  login(obj) {
+    return this.http.post<any[]>(`${this.URL}/users_login`, obj, { headers: this.headers })
+  }
+
+  logout() {
+    window.localStorage.removeItem('auth');
   }
 }
