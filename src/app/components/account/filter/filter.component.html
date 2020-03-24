@@ -1,22 +1,24 @@
 <div class="form-group">
   <br />
+  <div *ngIf="checkRole === 'admin'" >
   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"
     title="Open Modal Create Bank Account">Create Account</button>
   <hr />
+  </div>
   <h2>Search Bank Account</h2>
-  <form>
+  <form (ngSubmit)="filterAccount()"> 
     <div class="row">
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Account number">
+        <input type="text" class="form-control" [(ngModel)]="account_number"  placeholder="Account number">
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Balance">
+        <input type="text" class="form-control" [(ngModel)]="balance" placeholder="Balance">
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="First name">
+        <input type="text" class="form-control" [(ngModel)]="firstname" placeholder="First name">
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Last name">
+        <input type="text" class="form-control" [(ngModel)]="lastname" placeholder="Last name">
       </div>
     </div>
     <br />
@@ -26,33 +28,33 @@
       <br />
       <div class="row">
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Age">
+          <input type="text" class="form-control" [(ngModel)]="age" placeholder="Age">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Gender">
+          <input type="text" class="form-control" [(ngModel)]="gender" placeholder="Gender">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Address">
+          <input type="text" class="form-control" [(ngModel)]="address" placeholder="Address">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Employer">
+          <input type="text" class="form-control" [(ngModel)]="employer" placeholder="Employer">
         </div>
       </div>
       <br />
       <div class="row">
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Email">
+          <input type="text" class="form-control" [(ngModel)]="email" placeholder="Email">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="City">
+          <input type="text" class="form-control"  [(ngModel)]="city"placeholder="City">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="State">
+          <input type="text" class="form-control" [(ngModel)]="state" placeholder="State">
         </div>
       </div>
     </div>
     <br />
-    <button type="button" class="btn btn-primary">Search</button>&nbsp;
+    <button type="submit" class="btn btn-primary">Search</button>&nbsp;
     <button type="reset" class="btn btn-default">Reset</button>
   </form>
 </div>

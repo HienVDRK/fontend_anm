@@ -9,6 +9,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { FilterComponent } from './components/account/filter/filter.component';
+import { NavComponent } from './components/account/nav/nav.component';
 const routes: Routes = [
   { path: '', component: AccountComponent },
   { path: 'account', component: AccountComponent },
@@ -20,7 +21,8 @@ const routes: Routes = [
     AppComponent,
     AccountComponent,
     AuthComponent,
-    FilterComponent
+    FilterComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

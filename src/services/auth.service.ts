@@ -25,8 +25,4 @@ export class AuthService {
   login(obj) {
     return this.http.post<any[]>(`${this.URL}/users_login`, obj, { headers: this.headers })
   }
-
-  logout() {
-    window.localStorage.removeItem('auth');
-  }
 }

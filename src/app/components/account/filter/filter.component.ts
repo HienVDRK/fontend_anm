@@ -9,10 +9,16 @@ export class FilterComponent implements OnInit {
   @Input()
   data: string;
 
+  auth = window.localStorage.getItem('auth')
+  checkRole = JSON.parse(this.auth).role
+  
   constructor() { }
 
   ngOnInit() {
+    console.log('role', window.localStorage.getItem('auth'))
     console.log('filter data', this.data);
   }
-
+  filterAccount(){
+    
+  }
 }

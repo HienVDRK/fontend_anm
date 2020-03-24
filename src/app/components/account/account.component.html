@@ -1,3 +1,4 @@
+<app-nav></app-nav>
 <div class="container">
   <app-filter [data]="'dataa111'"></app-filter>
   <h2>List Bank Accounts </h2>
@@ -15,7 +16,8 @@
         <th>Email</th>
         <th>City</th>
         <th>State</th>
-        <th>Option</th>
+        <th>View</th>
+        <th  *ngIf="checkRole === 'admin'">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -33,7 +35,9 @@
         <td>{{account.state}}</td>
         <td>
           <span title="Show Detail Account" data-toggle="modal" data-target="#myModalDetail"
-          (click)="detailAccount(account._id.$oid)" class="glyphicon glyphicon-eye-open"></span>&nbsp;
+          (click)="detailAccount(account._id.$oid)" class="glyphicon glyphicon-eye-open"></span>
+        </td>
+        <td *ngIf="checkRole === 'admin'">
           <span title="Edit Account" data-toggle="modal" data-target="#myModalEdit"
             (click)="clickOpenModalEdit(account._id.$oid)" class="glyphicon glyphicon-edit"></span>&nbsp;
           <span title="Delete Account" (click)="deleteAccount(account._id.$oid)"

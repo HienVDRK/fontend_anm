@@ -28,11 +28,12 @@ export class AccountComponent implements OnInit {
   selectedGenderUpdate
   data:Array<Object> = ["M", "F"];
 
+  //https://www.npmjs.com/package/ngx-paginate
+
   constructor(
     private accountService: AccountService,
     private router: Router
   ) { }
-
 
   ngOnInit() {
     this.selectedGender = "M"
@@ -85,7 +86,6 @@ export class AccountComponent implements OnInit {
 
   deleteAccount(id) {
     if (this.checkRole == 'admin') {
-
       if (confirm("Are you sure to delete?")) {
         this.accountService.deleteAccount(id).subscribe((data: any) => {
           if (data.status == 200) {
@@ -93,7 +93,6 @@ export class AccountComponent implements OnInit {
             this.getAll()
           }
         }, err => {
-          console.log('err', err)
           if (err.status == 403) {
             alert(err.error.message)
           }
@@ -105,7 +104,6 @@ export class AccountComponent implements OnInit {
           }
         })
       }
-
     }
     else {
       alert("Not permission")
@@ -151,7 +149,6 @@ export class AccountComponent implements OnInit {
           this.getAll()
         }
       }, err => {
-        console.log('err', err)
         if (err.status == 400) {
           alert(err.error.message)
         }
