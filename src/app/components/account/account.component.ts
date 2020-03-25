@@ -21,28 +21,40 @@ export class AccountComponent implements OnInit {
   email: ''
   city: ''
   state: ''
-  accounts: ''
-  auth = window.localStorage.getItem('auth')
-  checkRole = JSON.parse(this.auth).role
+  accounts: Array<any>;
+  auth = JSON.parse(window.localStorage.getItem('auth')) || ''
+  checkRole = this.auth.role
   selectedGender
   selectedGenderUpdate
   data:Array<Object> = ["M", "F"];
 
-  //https://www.npmjs.com/package/ngx-paginate
+  totalItems : number;
+  page: number = 1;
 
   constructor(
     private accountService: AccountService,
     private router: Router
-  ) { }
+  ) {
+    this.accounts = new Array<any>();
+  }
 
   ngOnInit() {
-    this.selectedGender = "M"
-    this.getAll()
+    console.log('checkRole', this.checkRole)
+    if (this.auth == null || this.auth == '') {
+      this.router.navigate(['/']);
+    } else {
+      this.selectedGender = "M"
+      this.getAll()
+    }
+  }
+  clickPage(e){
+    console.log(e)
   }
 
   getAll() {
     this.accountService.getAccounts().subscribe((data: any) => {
       this.accounts = data
+      this.totalItems = this.accounts.length;
     })
   }
 

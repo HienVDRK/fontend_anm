@@ -1,55 +1,69 @@
 <div class="form-group">
-  <br />
-  <div *ngIf="checkRole === 'admin'" >
-  <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"
-    title="Open Modal Create Bank Account">Create Account</button>
-  <hr />
-  </div>
   <h2>Search Bank Account</h2>
-  <form (ngSubmit)="filterAccount()"> 
+  <form (ngSubmit)="filterAccount()">
     <div class="row">
       <div class="col-sm-3">
-        <input type="text" class="form-control" [(ngModel)]="account_number"  placeholder="Account number">
+        <label>Account number</label>
+        <input type="number" min="0" class="form-control" name="account_number" [(ngModel)]="account_number"
+          placeholder="Account number">
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control" [(ngModel)]="balance" placeholder="Balance">
+        <label>First name</label>
+        <input type="text" class="form-control" name="firstname" [(ngModel)]="firstname" placeholder="First name">
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control" [(ngModel)]="firstname" placeholder="First name">
+        <label>Last name</label>
+        <input type="text" class="form-control" name="lastname" [(ngModel)]="lastname" placeholder="Last name">
       </div>
       <div class="col-sm-3">
-        <input type="text" class="form-control" [(ngModel)]="lastname" placeholder="Last name">
+        <span class="togglecollage" aria-expanded="false" data-toggle="collapse"
+          data-target="#demo">
+          <span class="	glyphicon glyphicon-menu-down" title="Show advanced search"></span>
+          <span class="	glyphicon glyphicon-menu-up" title="Hide advanced search"></span>
+        </span>
       </div>
     </div>
-    <br />
-    <button class="btn btn-success text-right" data-toggle="collapse" data-target="#demo">Advanced search</button>
-    <br />
+
     <div id="demo" class="collapse">
       <br />
       <div class="row">
         <div class="col-sm-3">
-          <input type="text" class="form-control" [(ngModel)]="age" placeholder="Age">
+          <label>Balance</label>
+          <input type="number" min="0" class="form-control" name="balance" [(ngModel)]="balance" placeholder="Balance">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" [(ngModel)]="gender" placeholder="Gender">
+          <label>Age</label>
+          <input type="number" min="0" class="form-control" name="age" [(ngModel)]="age" placeholder="Age">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" [(ngModel)]="address" placeholder="Address">
+          <label>Gender</label>
+          <select class="form-control" [(ngModel)]="selectedGender" name="gender">
+            <option *ngFor="let item of dataGender" [ngValue]="item">{{item}}</option>
+          </select>
+          <!-- <input type="text" class="form-control" name="gender" [(ngModel)]="gender" placeholder="Gender"> -->
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" [(ngModel)]="employer" placeholder="Employer">
+          <label>Address</label>
+          <input type="text" class="form-control" name="address" [(ngModel)]="address" placeholder="Address">
         </div>
       </div>
       <br />
       <div class="row">
         <div class="col-sm-3">
-          <input type="text" class="form-control" [(ngModel)]="email" placeholder="Email">
+          <label>Employer</label>
+          <input type="text" class="form-control" name="employer" [(ngModel)]="employer" placeholder="Employer">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control"  [(ngModel)]="city"placeholder="City">
+          <label>Email</label>
+          <input type="text" class="form-control" name="email" [(ngModel)]="email" placeholder="Email">
         </div>
         <div class="col-sm-3">
-          <input type="text" class="form-control" [(ngModel)]="state" placeholder="State">
+          <label>City</label>
+          <input type="text" class="form-control" name="city" [(ngModel)]="city" placeholder="City">
+        </div>
+        <div class="col-sm-3">
+          <label>State</label>
+          <input type="text" class="form-control" name="state" [(ngModel)]="state" placeholder="State">
         </div>
       </div>
     </div>

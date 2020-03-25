@@ -17,7 +17,7 @@ export class AuthComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log('tokenlc', window.localStorage.getItem('auth'))
+    // console.log('tokenlc', window.localStorage.getItem('auth'))
   }
 
   onClickLogin() {
@@ -33,7 +33,7 @@ export class AuthComponent implements OnInit {
           'username': respone.username,
           'role': respone.role
         }));
-        this.router.navigate(['/']);
+        this.router.navigate(['/account']);
       }, err => {
         if (err.status == 401) {
           alert(err.error.error)

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,30 +10,34 @@ export class AccountService {
 
   private URL = 'http://localhost:5000/account';
 
-  private auth = window.localStorage.getItem('auth');
+  private auth = JSON.parse(window.localStorage.getItem('auth')) || '';
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${JSON.parse(this.auth).token}`
+    'Authorization': `Bearer ${this.auth.token} `
   })
 
+  searchAccounts(params) {
+    return this.http.get<any[]>(`${this.URL}/accounts1`, { params,  headers: this.headers })
+  }
+
   getAccounts() {
-    return this.http.get<any[]>(`${this.URL}/get_accounts`, { headers: this.headers })
+    return this.http.get<any[]>(`${this.URL}/accounts`, { headers: this.headers })
   }
 
   getAccounts_byID(id) {
-    return this.http.get<any[]>(`${this.URL}/get_accounts_by_id/${id}`, { headers: this.headers })
+    return this.http.get<any[]>(`${this.URL}/accounts/${id}`, { headers: this.headers })
   }
 
   addAccount(obj) {
-    return this.http.post<any[]>(`${this.URL}/add_account`, obj, { headers: this.headers })
+    return this.http.post<any[]>(`${this.URL}/accounts`, obj, { headers: this.headers })
   }
 
   updateAccount(id, obj) {
-    return this.http.put<any[]>(`${this.URL}/update_account/${id}`, obj,{ headers: this.headers })
+    return this.http.put<any[]>(`${this.URL}/accounts/${id}`, obj,{ headers: this.headers })
   }
 
   deleteAccount(id) {
-    return this.http.delete<any[]>(`${this.URL}/delete_account/${id}`, { headers: this.headers })
+    return this.http.delete<any[]>(`${this.URL}/accounts/${id}`, { headers: this.headers })
   }
 }

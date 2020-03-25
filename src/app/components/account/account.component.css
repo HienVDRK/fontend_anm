@@ -1,3 +1,53 @@
-table {
-  width: 100%;
+.view-detail {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.action-edit {
+  cursor: pointer;
+  margin-left: 5px;
+}
+.action-delete {
+  cursor: pointer;
+}
+
+.modal-body span{
+  font-size: 16px;
+}
+.required {
+  color: red;
+}
+
+/* pagination */
+.my-pagination /deep/ .ngx-pagination {
+  padding-left: 0px;
+}
+.my-pagination /deep/ .ngx-pagination .current {
+    background: #337ab7;
+    height: 36px;
+    line-height: 30px;
+    width: 36px;
+    text-align: center;
+}
+
+.my-pagination /deep/ .ngx-pagination .current, .btn-info {
+  height: 36px;
+  line-height: 32px;
+  width: 36px;
+  text-align: center;
+  background: #17a2b8 !important;
+  border: transparent !important;
+  border-radius: 20px !important;
+}
+
+.my-pagination /deep/ .ngx-pagination a:hover, .ngx-pagination button:hover {
+  background: #d4d4d4;
+  border-radius: 20px;
+  /* padding-left: 9px;
+  padding-right: 9px; */
+  text-decoration: none;
+}
+
+.my-pagination /deep/ .ngx-pagination a:focus, .ngx-pagination button:focus {
+  outline: none;
+  background: #d4d4d4;
 }

@@ -1,0 +1,12 @@
+.togglecollage{
+  float: right;
+  margin-top: 30px;
+}
+.togglecollage[aria-expanded=true] .glyphicon.glyphicon-menu-down {
+  display: none;
+  font-weight: bold;
+}
+.togglecollage[aria-expanded=false] .glyphicon.glyphicon-menu-up {
+  display: none;
+  font-weight: bold;
+}

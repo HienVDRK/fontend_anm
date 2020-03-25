@@ -1,5 +1,10 @@
 <app-nav></app-nav>
 <div class="container">
+  <div *ngIf="checkRole === 'admin'">
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal"
+      title="Open Modal Create Bank Account">Create Account</button>
+    <hr />
+  </div>
   <app-filter [data]="'dataa111'"></app-filter>
   <h2>List Bank Accounts </h2>
   <table class="table table-bordered">
@@ -17,11 +22,11 @@
         <th>City</th>
         <th>State</th>
         <th>View</th>
-        <th  *ngIf="checkRole === 'admin'">Action</th>
+        <th *ngIf="checkRole === 'admin'">Action</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let account of accounts">
+      <!-- <tr *ngFor="let account of accounts">
         <td>{{account.account_number}}</td>
         <td>{{account.balance}}</td>
         <td>{{account.firstname}}</td>
@@ -35,17 +40,49 @@
         <td>{{account.state}}</td>
         <td>
           <span title="Show Detail Account" data-toggle="modal" data-target="#myModalDetail"
-          (click)="detailAccount(account._id.$oid)" class="glyphicon glyphicon-eye-open"></span>
+          (click)="detailAccount(account._id.$oid)" class="glyphicon glyphicon-eye-open view-detail"></span>
         </td>
         <td *ngIf="checkRole === 'admin'">
           <span title="Edit Account" data-toggle="modal" data-target="#myModalEdit"
-            (click)="clickOpenModalEdit(account._id.$oid)" class="glyphicon glyphicon-edit"></span>&nbsp;
+            (click)="clickOpenModalEdit(account._id.$oid)" class="glyphicon glyphicon-edit action-edit"></span>&nbsp;
           <span title="Delete Account" (click)="deleteAccount(account._id.$oid)"
-            class="glyphicon glyphicon-remove-circle"></span>
+            class="glyphicon glyphicon-remove-circle action-delete"></span>
+        </td>
+      </tr> -->
+
+      <tr *ngFor="let account of accounts | paginate: { id: 'listing_pagination',
+                                                      itemsPerPage: 15,
+                                                      currentPage: page,
+                                                      totalItems: totalItems }">
+        <td>{{account.account_number}}</td>
+        <td>{{account.balance}}</td>
+        <td>{{account.firstname}}</td>
+        <td>{{account.lastname}}</td>
+        <td>{{account.age}}</td>
+        <td>{{account.gender}}</td>
+        <td>{{account.address}}</td>
+        <td>{{account.employer}}</td>
+        <td>{{account.email}}</td>
+        <td>{{account.city}}</td>
+        <td>{{account.state}}</td>
+        <td>
+          <span title="Show Detail Account" data-toggle="modal" data-target="#myModalDetail"
+            (click)="detailAccount(account._id.$oid)" class="glyphicon glyphicon-eye-open view-detail"></span>
+        </td>
+        <td *ngIf="checkRole === 'admin'">
+          <span title="Edit Account" data-toggle="modal" data-target="#myModalEdit"
+            (click)="clickOpenModalEdit(account._id.$oid)" class="glyphicon glyphicon-edit action-edit"></span>&nbsp;
+          <span title="Delete Account" (click)="deleteAccount(account._id.$oid)"
+            class="glyphicon glyphicon-remove-circle action-delete"></span>
         </td>
       </tr>
     </tbody>
   </table>
+  <div>
+    <pagination-controls (click)="clickPage(page)" class="my-pagination" id="listing_pagination" maxSize="10" directionLinks="true"
+      (pageChange)="page = $event">
+    </pagination-controls>
+  </div>
 
 
   <!-- Modal Create bank Account-->
@@ -62,33 +99,33 @@
             <div class="form-group">
               <div class="row">
                 <div class="col-md-6">
-                  <label>Account number</label>
+                  <label>Account number <span class="required">*</span></label>
                   <input type="number" min="0" class="form-control" [(ngModel)]="account_number" name="account_number">
                 </div>
                 <div class="col-md-6">
-                  <label>Balance</label>
+                  <label>Balance <span class="required">*</span></label>
                   <input type="number" min="0" class="form-control" [(ngModel)]="balance" name="balance">
                 </div>
               </div>
               <br />
               <div class="row">
                 <div class="col-md-6">
-                  <label>First name</label>
+                  <label>First name <span class="required">*</span></label>
                   <input type="text" class="form-control" [(ngModel)]="firstname" name="firstname">
                 </div>
                 <div class="col-md-6">
-                  <label>Last name</label>
+                  <label>Last name <span class="required">*</span></label>
                   <input type="text" class="form-control" [(ngModel)]="lastname" name="lastname">
                 </div>
               </div>
               <br />
               <div class="row">
                 <div class="col-md-6">
-                  <label>Age</label>
+                  <label>Age <span class="required">*</span></label>
                   <input type="number" min="0" class="form-control" [(ngModel)]="age" name="age">
                 </div>
                 <div class="col-md-6">
-                  <label>Gender</label>
+                  <label>Gender <span class="required">*</span></label>
                   <select class="form-control" [(ngModel)]="selectedGender" name="gender">
                     <option *ngFor="let item of data" [ngValue]="item">{{item}}</option>
                   </select>
@@ -97,29 +134,29 @@
               <br />
               <div class="row">
                 <div class="col-md-6">
-                  <label>Address</label>
+                  <label>Address <span class="required">*</span></label>
                   <input type="text" class="form-control" [(ngModel)]="address" name="address">
                 </div>
                 <div class="col-md-6">
-                  <label>Employer</label>
+                  <label>Employer <span class="required">*</span></label>
                   <input type="text" class="form-control" [(ngModel)]="employer" name="employer">
                 </div>
               </div>
               <br />
               <div class="row">
                 <div class="col-md-6">
-                  <label>Email</label>
+                  <label>Email <span class="required">*</span></label>
                   <input type="email" class="form-control" [(ngModel)]="email" name="email">
                 </div>
                 <div class="col-md-6">
-                  <label>City</label>
+                  <label>City <span class="required">*</span></label>
                   <input type="text" class="form-control" [(ngModel)]="city" name="city">
                 </div>
               </div>
               <br />
               <div class="row">
                 <div class="col-md-6">
-                  <label>State</label>
+                  <label>State <span class="required">*</span></label>
                   <input type="text" class="form-control" [(ngModel)]="state" name="state">
                 </div>
               </div>
@@ -229,73 +266,74 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Detail Bank Account</h4>
+          <h4 class="modal-title">Detail Bank Account Number : {{account_number}}</h4>
         </div>
         <div class="modal-body">
           <div class="row">
             <div class="col-lg-6">
-              <label>Account Number: </label>
-              <h4>{{account_number}}</h4>
+              <label>Account Number: </label> &nbsp;
+              <span>{{account_number}}</span>
             </div>
             <div class="col-lg-6">
-              <label>Balance: </label>
-              <h4>{{balance}}</h4>
-            </div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-lg-6">
-              <label>First name: </label>
-              <h4>{{firstname}}</h4>
-            </div>
-            <div class="col-lg-6">
-              <label>Last name: </label>
-              <h4>{{lastname}}</h4>
+              <label>Balance: </label> &nbsp;
+              <span>{{balance}}</span>
             </div>
           </div>
-          <hr />
+          <!-- <br /> -->
           <div class="row">
             <div class="col-lg-6">
-              <label>Age: </label>
-              <h4>{{age}}</h4>
+              <label>First name: </label> &nbsp;
+              <span>{{firstname}}</span>
             </div>
             <div class="col-lg-6">
-              <label>Gender: </label>
-              <h4>{{selectedGenderUpdate}}</h4>
+              <label>Last name: </label> &nbsp;
+              <span>{{lastname}}</span>
             </div>
           </div>
-          <hr />
+          <!-- <br /> -->
           <div class="row">
             <div class="col-lg-6">
-              <label>Address: </label>
-              <h4>{{address}}</h4>
+              <label>Age: </label> &nbsp;
+              <span>{{age}}</span>
             </div>
             <div class="col-lg-6">
-              <label>Employer: </label>
-              <h4>{{employer}}</h4>
+              <label>Gender: </label> &nbsp;
+              <span>{{selectedGenderUpdate}}</span>
             </div>
           </div>
-          <hr />
+          <!-- <br /> -->
           <div class="row">
             <div class="col-lg-6">
-              <label>Email: </label>
-              <h4>{{email}}</h4>
+              <label>Address: </label> &nbsp;
+              <span>{{address}}</span>
             </div>
             <div class="col-lg-6">
-              <label>City: </label>
-              <h4>{{city}}</h4>
+              <label>Employer: </label> &nbsp;
+              <span>{{employer}}</span>
             </div>
           </div>
-          <hr />
+          <!-- <br /> -->
           <div class="row">
             <div class="col-lg-6">
-              <label>State: </label>
-              <h4>{{state}}</h4>
+              <label>Email: </label> &nbsp;
+              <span>{{email}}</span>
+            </div>
+            <div class="col-lg-6">
+              <label>City: </label> &nbsp;
+              <span>{{city}}</span>
+            </div>
+          </div>
+          <!-- <br /> -->
+          <div class="row">
+            <div class="col-lg-6">
+              <label>State: </label> &nbsp;
+              <span>{{state}}</span>
             </div>
           </div>
 
         </div>
         <div class="modal-footer">
+          <button type="button" title="Open Edit Account" data-toggle="modal" data-target="#myModalEdit" (click)="clickOpenModalEdit(id)" class="btn btn-primary" data-dismiss="modal">Edit Account</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>

@@ -10,11 +10,11 @@ export class AuthService {
 
   private URL = 'http://localhost:5000/auth';
 
-  private auth = window.localStorage.getItem('auth');
+  private auth = JSON.parse(window.localStorage.getItem('auth')) || ''
 
   private headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': `Bearer ${JSON.parse(this.auth).token}`
+    'Authorization': `Bearer ${this.auth.token}`
   })
 
   getUser() {
