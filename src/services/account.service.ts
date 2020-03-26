@@ -17,8 +17,15 @@ export class AccountService {
     'Authorization': `Bearer ${this.auth.token} `
   })
 
-  searchAccounts(params) {
-    return this.http.get<any[]>(`${this.URL}/accounts1`, { params,  headers: this.headers })
+  searchAccounts(query: any, pageSize, pageIndex, orderBy, orderDirection) {
+    let params = {
+      'query': JSON.stringify(query),
+      'page_size': pageSize,
+      'page_index': pageIndex,
+      'order_by': orderBy,
+      'order_direction': orderDirection
+    }
+    return this.http.get<any[]>(`${this.URL}/accounts1`, { params, headers: this.headers })
   }
 
   getAccounts() {
@@ -34,7 +41,7 @@ export class AccountService {
   }
 
   updateAccount(id, obj) {
-    return this.http.put<any[]>(`${this.URL}/accounts/${id}`, obj,{ headers: this.headers })
+    return this.http.put<any[]>(`${this.URL}/accounts/${id}`, obj, { headers: this.headers })
   }
 
   deleteAccount(id) {

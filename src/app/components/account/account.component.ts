@@ -21,7 +21,7 @@ export class AccountComponent implements OnInit {
   email: ''
   city: ''
   state: ''
-  accounts: Array<any>;
+  accounts: Array<any>
   auth = JSON.parse(window.localStorage.getItem('auth')) || ''
   checkRole = this.auth.role
   selectedGender

@@ -10,3 +10,26 @@
   display: none;
   font-weight: bold;
 }
+.col-sort{
+  height: 50px;
+  cursor: pointer;
+}
+
+.view-detail {
+  cursor: pointer;
+  margin-left: 10px;
+}
+.action-edit {
+  cursor: pointer;
+  margin-left: 5px;
+}
+.action-delete {
+  cursor: pointer;
+}
+
+.modal-body span{
+  font-size: 16px;
+}
+.required {
+  color: red;
+}
